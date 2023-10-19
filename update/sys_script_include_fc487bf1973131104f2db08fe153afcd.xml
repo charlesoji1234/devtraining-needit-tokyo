@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_58872_needit.SIExample</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>SIExample</name>
+        <script><![CDATA[var SIExample = Class.create();
+SIExample.prototype = {
+    initialize: function() {
+    },
+	
+	message: function(){
+		gs.info('This is the first function');
+	},
+	
+	someIncidents: function(){
+		var someIncs = new GlideRecord('incident');
+		
+		someIncs.addQuery('category', 'software').addOrCondition('category', 'hardware').addOrCondition('category', 'network');
+		someIncs.query();
+		
+		while(someIncs.next()){
+			gs.info(someIncs.getValue('category'));
+		}
+	},
+	
+	someGlideSystemMethods: function(){
+		gs.info('daysAgo(4) method returned ' + gs.daysAgo(4));
+		gs.info('daysAgoStart(4) method returned ' + gs.daysAgoStart(4));
+		gs.info('endOfLastWeek method returned ' + gs.endOfLastWeek());
+		gs.info('endOfLastMonth returned ' + gs.endOfLastMonth());
+	},
+	
+	someGlideDateTimeMethods: function(){
+		
+		var gdt = new GlideDateTime("2011-08-31 08:00:00");
+		var now = new GlideDateTime();
+		
+		gs.info('Is gdt before now? ' + gdt.before(now));
+
+		var gdt2010 = new GlideDateTime('2010-08-31 08:00:00');
+		var gdt2012 = new GlideDateTime("2012-08-31 08:00:00");
+		
+		gs.info("Numerical value of gdt2010 is " + gdt2010.getNumericValue());
+		gs.info("Numerical value of gdt2012 is " + gdt2012.getNumericValue());
+		
+		if(gdt2012.getNumericValue() > gdt2010.getNumericValue()){
+			gs.info("gdt2012.getNumericValue() > gdt2010.getNumericValue() so gdt2012 comes after gdt2010");
+		}
+		
+	},
+	
+	activeTableRows: function(table){
+		var gr = new GlideRecord(table);
+		
+		gr.addQuery('active', 'true');
+		gr.query();
+		
+		while(gr.next()){
+		   gs.info(gr.getValue('short_description'));
+	    }
+	},
+	
+    theIncidents: function(){
+		var gr = new GlideRecord('incident');
+		
+		gr.query();
+	   
+		while(gr.next()){
+		   gs.info(gr.short_description);
+	    }
+	},
+	
+	activeIncidents: function(){
+		var gr = new GlideRecord('incident');
+		
+		gr.addQuery('active', 'true');
+		gr.query();
+	   
+		while(gr.next()){
+		   gs.info(gr.short_description);
+	    }
+	},
+	
+	inactiveIncidents: function(){
+		var gr = new GlideRecord('incident');
+		
+		gr.addQuery('active', 'false');
+		gr.query();
+	   
+		while(gr.next()){
+		   gs.info(gr.short_description);
+	    }
+	},
+	
+	interactionLogs: function(){
+		var gr = new GlideRecord('interaction_log');
+		
+		gr.query();
+	   
+		while(gr.next()){
+		   gs.info(gr.number);
+	    }
+	},
+
+	ipAddress: function(){
+		var gr = new GlideRecord('ip_address_item');
+		
+		gr.query();
+	   
+		while(gr.next()){
+		   gs.info(gr.sys_created_on);
+	    }
+	},
+
+    type: 'SIExample'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-11 13:00:34</sys_created_on>
+        <sys_id>fc487bf1973131104f2db08fe153afcd</sys_id>
+        <sys_mod_count>41</sys_mod_count>
+        <sys_name>SIExample</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_include_fc487bf1973131104f2db08fe153afcd</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-19 13:09:23</sys_updated_on>
+    </sys_script_include>
+</record_update>
